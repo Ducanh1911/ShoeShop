@@ -1,19 +1,20 @@
-backend
+- backend
 
 npm install
 
 npm start
 
-frontend
+- frontend
 
 npm install
 
 npm start
 
 
-server
+- server
 
 npm install
 
 npm start
+
 
