@@ -4,6 +4,7 @@ import jwt from "jsonwebtoken";
 import { createClient } from "redis";
 import User from "../Models/UserModel.js";
 import generateToken from "../utils/generateToken.js";
+import { loginRateLimiter, loginSpeedLimiter } from "../Middleware/RateLimitMiddleware.js";
 
 const userRouter = express.Router();
 
@@ -76,6 +77,8 @@ const admin = (req, res, next) => {
 // ===============================
 userRouter.post(
     "/login",
+    loginSpeedLimiter,
+    loginRateLimiter,
     asyncHandler(async (req, res) => {
         const { email, password } = req.body;
         const user = await User.findOne({ email });
